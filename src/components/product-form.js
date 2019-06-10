@@ -8,17 +8,14 @@ export class ProductForm extends Component {
         super(props);
 
         this.state = {
-            productData: {},
-            formnames: []
+            productData: {}
         }
     }
 
     componentDidMount(){
         const { data } = this.props;
-        let formnames = Common.formnames;
         this.setState({
             productData: data,
-            formnames
         })
     }
 
@@ -37,14 +34,13 @@ export class ProductForm extends Component {
     }
 
     render() {
-        const { data } = this.props;
         const { productData } = this.state;
         return (
             <div>
                 <Form className="py-2" onSubmit={this.handleSubmit}>
-                    <div className="d-flex flex-row justify-content-between">
+                    <div className="d-flex flex-row justify-content-start">
                         <div>
-                            <img src={data.baseImage} className="img-fluid" />
+                            <img src={productData.baseImage} className="img-fluid" />
                             <FormGroup className="pt-2">
                                 <Label for="productTitle">Product Title</Label>
                                 <Input type="text" name="title" id="productTitle" placeholder="Enter title" value={productData.title} onChange={(event) => this.onChange(event, "title")} />
@@ -71,7 +67,7 @@ export class ProductForm extends Component {
                             </FormGroup>
                         </div>
                         <div>
-                            <ImageBox />
+                            <ImageBox images={this.props.data.images} />
                         </div>
                     </div>
                     <Button type="submit">Submit</Button>

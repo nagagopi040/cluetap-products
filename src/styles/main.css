@@ -1,0 +1,21 @@
+.selected {
+    width: 600px;
+    z-index: 999;
+}
+
+img {
+    object-fit: contain;
+    max-height: 200px;
+}
+
+.form-control {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid grey;
+}
+
+div[disabled] {
+  pointer-events: none;
+  opacity: 0.6;
+}

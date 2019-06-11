@@ -8,6 +8,7 @@ export class ProductCard extends Component {
 
         this.state = {
             editable: false,
+            enable: true,
             data: {}
         }
     }
@@ -19,14 +20,16 @@ export class ProductCard extends Component {
 
     onClick = () => {
         this.setState({
-            editable: true
+            editable: true,
+            enable: false
         })
-        this.props.onClick(true);
+        this.props.onClick();
     }
 
     onSubmit = (data) => {
         this.setState({
             data,
+            enable: true,
             editable: false
         })
         this.props.onSubmit(data);
@@ -34,22 +37,20 @@ export class ProductCard extends Component {
 
     render() {
         const { editable, data, enable } = this.state;
+        const { index } = this.props;
         return (
-            <Card className={`my-2 ${editable ? "selected" : ""}`} >
-                <CardBody onClick={this.onClick} disabled={ (editable && enable) && !this.props.enable}>
-                    {
-                        editable ?
-                        <div>
-                            <ProductForm data={data} onSubmit={this.onSubmit}/>
-                        </div>
-                        :
-                        <div className="py-2">
-                            <CardImg src={data.baseImage} />
-                            <CardTitle>{data.title ? data.title : "Product Title"}</CardTitle>
-                            <CardText>&#8377; {data.price ? data.price : "--"}</CardText>
-                        </div>
-                    }
+            <Card className={`my-2`}  disabled={enable && !this.props.enable} >
+                <CardBody onClick={this.onClick}>
+                    <CardImg src={data.baseImage} className="banner-image" />
+                    <CardTitle>{data.title ? data.title : "Product Title"}</CardTitle>
+                    <CardText>&#8377; {data.price ? data.price : "--"}</CardText>
                 </CardBody>
+                {
+                    editable && 
+                    <CardBody className={`${editable ? "selected" : ""} ${(index+1)%3 === 0 ? "third-card" : ""}`}>
+                        <ProductForm data={data} onSubmit={this.onSubmit}/>
+                    </CardBody>
+                }
             </Card>
         );
     }

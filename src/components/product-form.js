@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Form, FormGroup, Input, Label, Button } from "reactstrap";
-import { ImageBox } from "./image-box";
-import { Common } from '../utils';
+import { ImageBox, VariationBox } from "./../components";
 
 export class ProductForm extends Component {
     constructor(props){
@@ -33,14 +32,30 @@ export class ProductForm extends Component {
         })
     }
 
+    onImageClick = (image) => {
+        let { productData } = this.state;
+        productData.baseImage = image;
+        this.setState({
+            productData
+        })
+    }
+
+    onImageUpload = (images) => {
+        let { productData } = this.state;
+        productData.images = images;
+        this.setState({
+            productData
+        })
+    }
+
     render() {
         const { productData } = this.state;
         return (
             <div>
                 <Form className="py-2" onSubmit={this.handleSubmit}>
                     <div className="d-flex flex-row justify-content-start">
-                        <div>
-                            <img src={productData.baseImage} className="img-fluid" />
+                        <div className="product-info">
+                            <img src={productData.baseImage} className="img-fluid banner-image" />
                             <FormGroup className="pt-2">
                                 <Label for="productTitle">Product Title</Label>
                                 <Input type="text" name="title" id="productTitle" placeholder="Enter title" value={productData.title} onChange={(event) => this.onChange(event, "title")} />
@@ -67,10 +82,11 @@ export class ProductForm extends Component {
                             </FormGroup>
                         </div>
                         <div>
-                            <ImageBox images={this.props.data.images} />
+                            <ImageBox images={this.props.data.images} onImageClick={this.onImageClick} onImageUpload={this.onImageUpload} />
+                            <VariationBox variations={this.props.data.variations} />
                         </div>
                     </div>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" color="success">Save</Button>
                 </Form>
             </div>
         );

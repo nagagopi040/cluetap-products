@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card,CardBody, CardTitle, Input, CardImg, Row, Col } from "reactstrap"
+import { Card,CardBody, CardTitle, Input, CardImg } from "reactstrap"
 
 export class ImageBox extends Component {
     constructor(props){
@@ -22,28 +22,26 @@ export class ImageBox extends Component {
         this.setState({images})
     }
 
+    onImageClick = (image) => {
+        this.props.onImageClick(image);
+    }
+
     render() {
         const { images } = this.state;
         return (
             <Card className="border-0 images-card">
-                <CardBody className="py-0 d-flex flex-row justify-content-start">
-                    <Row className="images-row">
-                        {
-                            images.length > 0 && images.map( (image, index) => {
-                                return (
-                                    <Col className="col-6 px-1 mb-2">
-                                        <CardImg key={index} src={image} className="product-image" />
-                                    </Col>
-                                )
-                            })
-                        }
-                        {
-                            images.length < 4 && 
-                            <Col className="col-6 px-1 mb-2">
-                                <CardTitle className="plus-symbol">&#43;<Input type="file" className="file-upload" onChange={this.uploadImage} /></CardTitle>
-                            </Col>
-                        }
-                    </Row>
+                <CardBody className="py-0 pr-0 d-flex flex-row justify-content-start flex-wrap">
+                    {
+                        images.length > 1 && images.map( (image, index) => {
+                            return (
+                                <CardImg key={index} src={image} className="product-image" onClick={() => this.onImageClick(image)} />
+                            )
+                        })
+                    }
+                    {
+                        images.length < 6 && 
+                        <CardTitle className="plus-symbol">&#43;<Input type="file" className="file-upload" onChange={this.uploadImage} /></CardTitle>
+                    }
                 </CardBody>
             </Card>
         );

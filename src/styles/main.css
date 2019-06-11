@@ -1,11 +1,28 @@
+.card {
+    position: relative;
+}
+
 .selected {
+    position: absolute;
+    background: white;
     width: 600px;
     z-index: 999;
 }
 
-img {
-    object-fit: contain;
-    max-height: 200px;
+.third-card {
+    position: absolute;
+    right: 0;
+}
+
+.product-image {
+    max-width: 100%;
+    height: 200px;
+}
+
+.banner-image {
+    object-fit: fill;
+    height: 200px;
+    width: 300px;
 }
 
 .form-control {
@@ -20,39 +37,83 @@ div[disabled] {
   opacity: 0.6;
 }
 
-.images-card {
-    height: 100px;
-    max-width: 300px;
+.product-info {
+    min-width: 300px;
 }
 
-.images-row {
-    max-height: 200px;
-    flex-wrap: wrap;
+.images-card {
+    max-width: 250px;
+    height: 200px;
 }
 
 .plus-symbol {
-    width: 100%;
-    height: 80px;
-    margin: 0;
-    font-size: 45px;
+    width: 64px;
+    height: 64px;
+    font-size: 36px;
+    opacity: 0.6;
     text-align: center;
-    border: 1px solid;
+    border: 1px solid grey;
     background: url("https://carepharmaceuticals.com.au/wp-content/uploads/sites/19/2018/02/placeholder-600x400.png");
     background-repeat: no-repeat;
+    background-size: 75px 75px;
+    background-position: center;
     position: relative;
+    margin: 0;
 }
 
-.product-image {
-    height: 80px;
-    object-fit: fill;
-    margin: 0;
+.small-plus {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 15px !important;
+    padding: 0 5px;
+    margin-right: 5px;
 }
 
 .file-upload {
     opacity: 0.0;
-    width: 100%;
-    height: 80px;
+    height: 65px;
     position: absolute;
     left: 0;
     top: 0;
+    margin: 0;
+    padding-right: 5px;
+}
+
+.product-image {
+    width: 75px;
+    height: 65px;
+    object-fit: cover;
+    margin-bottom: 5px;
+    padding: 0 5px;
+}
+
+.varitions-box {
+    width: 250px;
+    align-items: center;
+}
+
+.varitions-plus-symbol {
+    opacity: 0.6;
+    height: 50px;
+    width: 50px;
+    font-size: 25px;
+    border: 1px solid grey;
+    text-align: center;
+}
+
+.variations {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+}
+
+.variations p {
+    line-height: 40px;
+}
+
+.variations .varitions-plus-symbol {
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    margin-right: 10px;
 }

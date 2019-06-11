@@ -8,7 +8,8 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            products: []
+            products: [],
+            enable: true
         }
     }
 
@@ -16,9 +17,9 @@ export default class App extends Component {
         this.setState({products: Common.products})
     }
 
-    onClick = (value) => {
+    onClick = () => {
         this.setState({
-            enable: value
+            enable: false
         })
     }
 
@@ -31,6 +32,10 @@ export default class App extends Component {
                     ...data
                 }
             }
+        })
+        this.setState({
+            products,
+            enable: true
         })
     }
 
@@ -46,10 +51,10 @@ export default class App extends Component {
                 </Row>
                 <Row>
                     {
-                        products.length > 0 && products.map(product => {
+                        products.length > 0 && products.map( (product, index) => {
                             return (
                                 <Col key={product.id} className="col-12 col-md-4" >
-                                    <ProductCard data={product} onClick={this.onClick} enable={enable} onSubmit={this.onSubmit}/>
+                                    <ProductCard data={product} onClick={this.onClick} enable={enable} onSubmit={this.onSubmit} index={index} />
                                 </Col>
                             )
                         })
